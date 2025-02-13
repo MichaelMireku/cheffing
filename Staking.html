@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$IE - Internet Explorer Meme Coin</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="$IE is a Solana-based meme coin designed to bring nostalgic charm and innovation together for investors and the crypto community.">
+</head>
+<body>
+  <!-- Top Navigation Toolbar -->
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <button class="toolbar-btn back-btn">←</button>
+
+      <button class="toolbar-btn forward-btn">→</button>
+      <button class="toolbar-btn refresh-btn">⟳</button>
+      <button class="toolbar-btn home-btn" onclick="goHome()">🏠</button>
+    </div>
+    <input type="text" class="address-bar" value="ca: DfYVDWY1ELNpQ4s1CK5d7EJcgCGYw27DgQo2bFzMH6fA" readonly>
+    <a href="https://raydium.io/swap/?inputMint=sol&outputMint=DfYVDWY1ELNpQ4s1CK5d7EJcgCGYw27DgQo2bFzMH6fA" button class="go-btn" >Go</a></button>
+  </div>
+
+  <!-- Main Menu -->
+   <!-- Menu Bar -->
+   <div class="menu-bar">
+    <div class="menu-item">File</div>
+    <div class="menu-item">Edit</div>
+    <div class="menu-item">View</div>
+       <div class="menu-item"><a href="https://github.com/MichaelMireku/INTERNET-EXPLORER-sol/blob/main/README.md" >White Paper</a></div>
+       <div class="menu-item"><a href="Staking.html">Staking</a></div>  
+   </div>
+
+ 
+  <!-- Staking Section -->
+<section class="staking">
+  <h2>$IE Staking</h2>
+  <p>Stake your $IE tokens and earn rewards based on your selected tier.</p>
+
+  <label for="tier-select">Select Staking Tier:</label>
+  <select id="tier-select">
+    <option value="dialup">Dial-Up (100 $IE - 2% APY)</option>
+    <option value="dsl">DSL (500 $IE - 5% APY)</option>
+    <option value="fiber">Fiber (1,000 $IE - 8% APY)</option>
+    <option value="broadband">Broadband (5,000 $IE - 12% APY)</option>
+  </select>
+
+  <label for="stake-amount">Enter Amount to Stake:</label>
+  <input type="number" id="stake-amount" placeholder="Enter $IE amount" min="100">
+
+  <button onclick="stakeTokens()">Stake Now</button>
+  
+  <h3>Your Staking Info</h3>
+  <p id="staking-status">You have not staked yet.</p>
+</section>
+
+    <!-- Call to Action -->
+    <div class="cta-section">
+      
+      <button class="cta-btn" 
+
+onclick="addToWallet()">Add to Wallet</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 $IE Meme Coin. Powered by Solana. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
