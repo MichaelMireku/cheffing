@@ -137,6 +137,48 @@ body {
   transform: scale(1.05);
 }
 
+/* WMP Section */
+.media-player {
+  width: 500px;
+  background: linear-gradient(to bottom, #808080, #606060);
+  border: 3px solid #000;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 50px auto;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.title-bar {
+  background: #0a5c9a;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  text-align: left;
+  font-size: 14px;
+}
+
+video {
+  width: 100%;
+  display: block;
+  background: black;
+  border: 2px solid #333;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  background: #404040;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+input[type="range"] {
+  flex: 1;
+  margin: 0 10px;
+}
+
 /* Nostalgia Section */
 .nostalgia-section {
   background-image: url("/assets/vap2.gif");
