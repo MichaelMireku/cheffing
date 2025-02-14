@@ -141,7 +141,7 @@ body {
 
 .wmp9-container {
   width: 500px;
-  background: linear-gradient(to bottom, #0055A4, #002F5E);
+  background: linear-gradient(to bottom, #0055a4, #002f5e);
   border: 3px solid #000;
   padding: 10px;
   border-radius: 10px;
@@ -151,7 +151,7 @@ body {
 }
 
 .title-bar {
-  background: linear-gradient(to right, #1A65C1, #00498A);
+  background: linear-gradient(to right, #1a65c1, #00498a);
   color: white;
   font-weight: bold;
   padding: 5px;
@@ -165,7 +165,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #003C74;
+  background: #003c74;
   padding: 5px;
   border-radius: 5px;
   font-size: 13px;
@@ -179,7 +179,7 @@ video {
   width: 100%;
   display: block;
   background: black;
-  border: 2px solid #00498A;
+  border: 2px solid #00498a;
   border-radius: 5px;
 }
 
@@ -188,7 +188,7 @@ video {
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
-  background: linear-gradient(to bottom, #0066CC, #004488);
+  background: linear-gradient(to bottom, #0066cc, #004488);
   padding: 8px;
   border-radius: 5px;
   box-shadow: inset 0px -2px 4px rgba(255, 255, 255, 0.3);
@@ -216,7 +216,7 @@ input[type="range"] {
   margin: 0 10px;
   -webkit-appearance: none;
   height: 5px;
-  background: #0055A4;
+  background: #0055a4;
   border-radius: 5px;
   outline: none;
 }
