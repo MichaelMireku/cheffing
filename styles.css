@@ -185,7 +185,6 @@ video {
 
 .controls {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
@@ -193,6 +192,7 @@ video {
   padding: 8px;
   border-radius: 5px;
   box-shadow: inset 0px -2px 4px rgba(255, 255, 255, 0.3);
+  flex-wrap: wrap;
 }
 
 button {
