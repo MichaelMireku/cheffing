@@ -82,7 +82,7 @@ body {
 /* Content Window */
 .content-window {
   padding: 20px;
-  background-image: url("/assets/arcadee.gif");
+
   border: 1px solid black;
   border-radius: 5px;
   margin: 20px auto;
