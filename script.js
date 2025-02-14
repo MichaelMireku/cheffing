@@ -28,10 +28,10 @@ const trackTitle = document.getElementById("trackTitle");
 playPause.addEventListener("click", () => {
   if (video.paused) {
     video.play();
-    playPause.innerHTML = '<img src="pause.png" alt="Pause">';
+    playPause.innerHTML = '<img src="assets/pause.png" alt="Pause">';
   } else {
     video.pause();
-    playPause.innerHTML = '<img src="play.png" alt="Play">';
+    playPause.innerHTML = '<img src="assets/play.png" alt="Play">';
   }
 });
 
@@ -39,7 +39,7 @@ playPause.addEventListener("click", () => {
 stop.addEventListener("click", () => {
   video.pause();
   video.currentTime = 0;
-  playPause.innerHTML = '<img src="play.png" alt="Play">';
+  playPause.innerHTML = '<img src="assets/play.png" alt="Play">';
 });
 
 // Seek bar update
