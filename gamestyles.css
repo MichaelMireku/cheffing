@@ -93,7 +93,7 @@ body {
 .hero {
   text-align: center;
   padding: 20px;
-  background-image: url("assets/arcade1.gif");
+
   border: 1px solid black;
   border-radius: 5px;
 }
