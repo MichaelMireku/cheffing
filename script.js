@@ -24,6 +24,13 @@ const volume = document.getElementById("volume");
 const fullscreen = document.getElementById("fullscreen");
 const trackTitle = document.getElementById("trackTitle");
 
+//autoplay unmutes
+window.addEventListener('click', () => {
+    if (video.muted) {
+      video.muted = false;
+    }
+}, { once: true});
+
 // Play / Pause functionality
 playPause.addEventListener("click", () => {
   if (video.paused) {
