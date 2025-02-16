@@ -164,7 +164,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #85a5c2;
+  background: #fffdd0;
   padding: 5px;
   border-radius: 5px;
   font-size: 13px;
@@ -187,7 +187,7 @@ video {
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
-  background: linear-gradient(to bottom, #0066cc, #004488);
+  background: linear-gradient(to bottom, #85a5c2, #004488);
   padding: 8px;
   border-radius: 5px;
   box-shadow: inset 0px -2px 4px rgba(255, 255, 255, 0.3);
