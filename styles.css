@@ -140,7 +140,7 @@ body {
 
 .wmp9-container {
   max-width: 800px;
-  background: linear-gradient(to bottom, #fffdd0, #faf8d2);
+  background: linear-gradient(to bottom, #faf8d2, #faf8d2);
   border: 3px solid #000;
 
   border-radius: 10px;
