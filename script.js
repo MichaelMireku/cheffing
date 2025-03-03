@@ -16,11 +16,11 @@ function goHome() {
 }
 
 //Menu bar
-function Git() {
+function git() {
   window.open("https://github.com/MichaelMireku/INTERNET-EXPLORER-sol/blob/main/README.md");
 }
 
-//Add to wallet
+//Add to raydium
 function toRaydium() {
   window.open("https://raydium.io/swap/?inputMint=sol&outputMint=DfYVDWY1ELNpQ4s1CK5d7EJcgCGYw27DgQo2bFzMH6fA");
 }
