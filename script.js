@@ -73,3 +73,8 @@ fullscreen.addEventListener("click", () => {
     video.msRequestFullscreen();
   }
 });
+
+// Add $IE to wallet (placeholder functionality)
+function addToWallet() {
+  window.open("https://dexscreener.com/solana/HU9TSBH3HsY1GFAtCNsAX2B5jCvt7D8WFR29ioL54rgn");
+}
