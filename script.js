@@ -15,6 +15,10 @@ function goHome() {
   window.location.href = "index.html";
 }
 
+function toRaydium() {
+  window.open("https://raydium.io/swap/?inputMint=sol&outputMint=DfYVDWY1ELNpQ4s1CK5d7EJcgCGYw27DgQo2bFzMH6fA");
+}
+
 // WMP
 const video = document.getElementById("video");
 const playPause = document.getElementById("playPause");
