@@ -20,6 +20,10 @@ function git() {
   window.open("https://github.com/MichaelMireku/INTERNET-EXPLORER-sol/blob/main/README.md");
 }
 
+function game() {
+  window.location.href = "Gamepage.html";
+}
+
 //Add to raydium
 function toRaydium() {
   window.open("https://raydium.io/swap/?inputMint=sol&outputMint=DfYVDWY1ELNpQ4s1CK5d7EJcgCGYw27DgQo2bFzMH6fA");
