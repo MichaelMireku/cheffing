@@ -283,6 +283,17 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 5px;
 }
 
+.quest {
+  font-family: "Tahoma", Arial, sans-serif;
+  font-weight: 200;
+  padding: 20px;
+  margin: 20px auto;
+  background-image: url("assets/roadmap.gif");
+  max-width: 800px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
 .staking {
   background-image: url("assets/rab.gif");
   border: 2px solid #0078d7;
