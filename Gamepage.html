@@ -48,6 +48,31 @@
 </div>
 </div>
 
+<!-- WMP Section -->
+ 
+<div class="wmp9-container">
+  <div class="title-bar">
+      <span>Windows Media Player</span>
+  </div>
+  
+  <div class="now-playing">
+      <img src="assets/wmp9.png" class="logo" alt="WMP9 Logo">
+      <span id="trackTitle">Now Playing: 10x Tournament Announcement</span>
+  </div>
+
+  <video id="video" autoplay muted>
+      <source src="assets/10XTOURNAMENT.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+  </video>
+
+  <div class="controls">
+      <button id="playPause"><img src="assets/play.png" alt="Play"></button>
+      <button id="stop"><img src="assets/stop.png" alt="Stop"></button>
+      <input type="range" id="seek" value="0">
+      <input type="range" id="volume" min="0" max="1" step="0.1" value="1">
+      <button id="fullscreen"><img src="assets/fullscreen.jpg" alt="Fullscreen"></button>
+  </div>
+</div>
 
 
   <script src="script.js"></script>
