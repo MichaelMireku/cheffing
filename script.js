@@ -16,6 +16,10 @@ function goHome() {
 }
 
 //Menu bar
+function mw() {
+  window.location.href = "mw.html";
+}
+
 function git() {
   window.open("https://github.com/MichaelMireku/INTERNET-EXPLORER-sol/blob/main/README.md");
 }
