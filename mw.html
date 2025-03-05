@@ -3,145 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketing Wallet Dashboard</title>
+    <title>Marketing Wallet Tracker</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
+            font-family: 'Arial', sans-serif;
             background-color: #121212;
-            color: #00ffcc;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
         }
-        #balance {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 20px;
+
+        .container {
+            max-width: 400px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: auto;
+            box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
         }
-        #transactions {
-            width: 80%;
-            margin: 0 auto;
-            text-align: left;
-            border: 1px solid #00ffcc;
-            padding: 10px;
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .balance {
+            font-size: 20px;
+            background: #222;
+            padding: 12px;
             border-radius: 8px;
-            max-width: 600px;
-            background-color: #1a1a1a;
+            display: inline-block;
+            font-weight: bold;
+            color: #6aff6a;
         }
-        .tx {
-            border-bottom: 1px solid #00ffcc;
-            padding: 10px 0;
+
+        .transactions {
+            text-align: left;
+            background: #292929;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
         }
-        .tx:last-child {
-            border-bottom: none;
+
+        .transactions ul {
+            list-style-type: none;
+            padding: 0;
         }
-        .tx a {
-            color: #00ffcc;
+
+        .transactions li {
+            background: #333;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 6px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.2s;
+        }
+
+        .transactions li:hover {
+            background: #444;
+        }
+
+        .transactions a {
+            color: #6affff;
             text-decoration: none;
+            font-weight: bold;
+        }
+
+        .copy-btn {
+            background: #555;
+            color: #fff;
+            border: none;
+            padding: 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #777;
+        }
+
+        .status {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #888;
         }
     </style>
 </head>
 <body>
 
-    <h1>Marketing Wallet Dashboard</h1>
-    <p id="balance">Fetching balance...</p>
+    <div class="container">
+        <h2>Marketing Wallet Tracker</h2>
+        <p class="balance">Balance: <span id="wallet-balance">Loading...</span> SOL</p>
 
-    <h2>Recent Transactions</h2>
-    <div id="transactions">Fetching transactions...</div>
+        <div class="transactions">
+            <h3>Recent Transactions:</h3>
+            <ul id="transactions-list">Loading...</ul>
+        </div>
+
+        <p class="status">Updating every 10 seconds...</p>
+    </div>
 
     <script>
+    async function fetchSolanaData() {
         const walletAddress = "CWeBUhLXGyXPBvsfL99VoZnVtC4uQfUh7cW8xiMY8N73";
-        const apiUrl = "https://api.mainnet-beta.solana.com";
-        const explorerUrl = "https://solscan.io/tx/";
+        const rpcUrl = "https://api.mainnet-beta.solana.com";
 
-        async function fetchSolanaBalance() {
-            try {
-                const response = await fetch(apiUrl, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        "jsonrpc": "2.0",
-                        "id": 1,
-                        "method": "getBalance",
-                        "params": [walletAddress]
-                    })
-                });
-                const data = await response.json();
-                const lamports = data.result?.value || 0;
-                const solBalance = lamports / 1_000_000_000; // Convert to SOL
-                document.getElementById("balance").innerText = ${solBalance.toFixed(4)} SOL;
-            } catch (error) {
-                console.error("Error fetching balance:", error);
-                document.getElementById("balance").innerText = "Error fetching balance";
-            }
+        try {
+            // Fetch balance
+            const balanceResponse = await fetch(rpcUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    jsonrpc: "2.0",
+                    id: 1,
+                    method: "getBalance",
+                    params: [walletAddress]
+                })
+            });
+            const balanceData = await balanceResponse.json();
+            const solBalance = (balanceData.result.value / 1_000_000_000).toFixed(4);
+            document.getElementById("wallet-balance").innerText = solBalance;
+
+            // Fetch recent transactions
+            const txResponse = await fetch(rpcUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    jsonrpc: "2.0",
+                    id: 1,
+                    method: "getSignaturesForAddress",
+
+                    params: [walletAddress, { limit: 5 }]
+                })
+            });
+            const txData = await txResponse.json();
+            const transactionsList = document.getElementById("transactions-list");
+            transactionsList.innerHTML = "";
+
+            txData.result.forEach(tx => {
+                const listItem = document.createElement("li");
+                const txLink = document.createElement("a");
+                txLink.href = https://solscan.io/tx/${tx.signature};
+                txLink.target = "_blank";
+                txLink.innerText = tx.signature.substring(0, 10) + "...";
+
+                const copyBtn = document.createElement("button");
+                copyBtn.classList.add("copy-btn");
+                copyBtn.innerText = "Copy";
+                copyBtn.onclick = () => {
+                    navigator.clipboard.writeText(tx.signature);
+                    copyBtn.innerText = "Copied!";
+                    setTimeout(() => { copyBtn.innerText = "Copy"; }, 2000);
+                };
+
+                listItem.appendChild(txLink);
+                listItem.appendChild(copyBtn);
+                transactionsList.appendChild(listItem);
+            });
+
+        } catch (error) {
+            console.error("Error fetching Solana data:", error);
+            document.getElementById("wallet-balance").innerText = "Error";
+            document.getElementById("transactions-list").innerText = "Error fetching transactions";
         }
+    }
 
-        async function fetchRecentTransactions() {
-            try {
-                const response = await fetch(apiUrl, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        "jsonrpc": "2.0",
-                        "id": 1,
-                        "method": "getSignaturesForAddress",
-                        "params": [walletAddress, { "limit": 5 }]
-                    })
-                });
-                const data = await response.json();
-                const transactions = data.result || [];
-
-                let txDetails = await Promise.all(transactions.map(async (tx) => {
-                    const txSignature = tx.signature;
-                    const txTime = new Date(tx.blockTime * 1000).toLocaleString();
-                    
-                    // Fetch detailed transaction data
-                    const txResponse = await fetch(apiUrl, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            "jsonrpc": "2.0",
-                            "id": 1,
-                            "method": "getTransaction",
-                            "params": [txSignature, { "encoding": "jsonParsed" }]
-                        })
-                    });
-                    const txData = await txResponse.json();
-                    const txInfo = txData.result;
-let amount = 0, sender = "Unknown", receiver = "Unknown";
-                    if (txInfo?.meta?.preBalances && txInfo?.meta?.postBalances) {
-                        let balanceChange = (txInfo.meta.preBalances[0] - txInfo.meta.postBalances[0]) / 1_000_000_000;
-                        amount = Math.abs(balanceChange).toFixed(4);
-                    }
-
-                    if (txInfo?.transaction?.message?.accountKeys) {
-                        sender = txInfo.transaction.message.accountKeys[0].pubkey || "Unknown";
-                        receiver = txInfo.transaction.message.accountKeys[1].pubkey || "Unknown";
-                    }
-
-                    return 
-                        <div class="tx">
-                            <p><strong>Transaction:</strong> <a href="${explorerUrl}${txSignature}" target="_blank">${txSignature.slice(0, 10)}...</a></p>
-                            <p><strong>Amount:</strong> ${amount} SOL</p>
-                            <p><strong>Sender:</strong> ${sender.slice(0, 10)}...</p>
-                            <p><strong>Receiver:</strong> ${receiver.slice(0, 10)}...</p>
-                            <p><strong>Time:</strong> ${txTime}</p>
-                        </div>
-                    ;
-                }));
-
-                document.getElementById("transactions").innerHTML = txDetails.join("") || "No transactions found.";
-            } catch (error) {
-                console.error("Error fetching transactions:", error);
-                document.getElementById("transactions").innerText = "Error fetching transactions";
-            }
-        }
-
-        fetchSolanaBalance();
-        fetchRecentTransactions();
-        setInterval(() => {
-            fetchSolanaBalance();
-            fetchRecentTransactions();
-        }, 10000); // Refresh every 10 seconds
+    fetchSolanaData();
+    setInterval(fetchSolanaData, 10_000);
     </script>
 
 </body>
