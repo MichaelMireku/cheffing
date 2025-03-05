@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketing Wallet Tracker</title>
+    <title>$IE Wallet Tracker</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -98,8 +98,8 @@
 <body>
 
     <div class="container">
-        <h2>Marketing Wallet Tracker</h2>
-        <p class="balance">Balance: <span id="wallet-balance">Loading...</span> SOL</p>
+        <h2>$IE Wallet Tracker</h2>
+        <p class="balance">Balance: <span id="wallet-balance">Loading...</span> $IE</p>
 
         <div class="transactions">
             <h3>Recent Transactions:</h3>
@@ -110,43 +110,57 @@
     </div>
 
     <script>
-    async function fetchSolanaData() {
-        const walletAddress = "CWeBUhLXGyXPBvsfL99VoZnVtC4uQfUh7cW8xiMY8N73";
-        const rpcUrl = "https://api.mainnet-beta.solana.com";
+    const walletAddress = "DfYVDWY1ELNpQ4s1CK5d7EJcgCGYw27DgQo2bFzMH6fA";
+    const tokenMintAddress = "INSERT_IE_TOKEN_MINT_HERE"; // Replace with $IE Token Mint
+    const rpcUrl = "https://api.mainnet-beta.solana.com";
 
+    async function fetchIEBalance() {
         try {
-            // Fetch balance
-            const balanceResponse = await fetch(rpcUrl, {
+            // Fetch token accounts
+            const response = await fetch(rpcUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     jsonrpc: "2.0",
                     id: 1,
-                    method: "getBalance",
-                    params: [walletAddress]
+                    method: "getTokenAccountsByOwner",
+                    params: [walletAddress, { mint: tokenMintAddress }, { encoding: "jsonParsed" }]
                 })
             });
-            const balanceData = await balanceResponse.json();
-            const solBalance = (balanceData.result.value / 1_000_000_000).toFixed(4);
-            document.getElementById("wallet-balance").innerText = solBalance;
 
+            const data = await response.json();
+            const accounts = data.result.value;
+            
+            if (accounts.length > 0) {
+                const balance = accounts[0].account.data.parsed.info.tokenAmount.uiAmount;
+                document.getElementById("wallet-balance").innerText = balance.toLocaleString();
+            } else {
+                document.getElementById("wallet-balance").innerText = "0";
+            }
+        } catch (error) {
+            console.error("Error fetching $IE balance:", error);
+            document.getElementById("wallet-balance").innerText = "Error";
+        }
+    }
+    async function fetchIETransactions() {
+        try {
             // Fetch recent transactions
-            const txResponse = await fetch(rpcUrl, {
+            const response = await fetch(rpcUrl, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     jsonrpc: "2.0",
                     id: 1,
-                    method: "getSignaturesForAddress",
-
+                    method: "getConfirmedSignaturesForAddress2",
                     params: [walletAddress, { limit: 5 }]
                 })
             });
-            const txData = await txResponse.json();
+
+            const data = await response.json();
             const transactionsList = document.getElementById("transactions-list");
             transactionsList.innerHTML = "";
 
-            txData.result.forEach(tx => {
+            data.result.forEach(tx => {
                 const listItem = document.createElement("li");
                 const txLink = document.createElement("a");
                 txLink.href = https://solscan.io/tx/${tx.signature};
@@ -168,14 +182,18 @@
             });
 
         } catch (error) {
-            console.error("Error fetching Solana data:", error);
-            document.getElementById("wallet-balance").innerText = "Error";
+            console.error("Error fetching transactions:", error);
             document.getElementById("transactions-list").innerText = "Error fetching transactions";
         }
     }
 
-    fetchSolanaData();
-    setInterval(fetchSolanaData, 10_000);
+    function updateData() {
+        fetchIEBalance();
+        fetchIETransactions();
+    }
+
+    updateData();
+    setInterval(updateData, 10_000);
     </script>
 
 </body>
